@@ -1,29 +1,45 @@
 const timer = document.querySelector("#container");
 // timer to input this
-const mainTimer{
+class mainTimer{
   constructor(second){
     this.second = second;
     this.startTimer = this.second;
-    this render();
-
+    this.render();
   }
 }
 // counter div reduction
 counter(){
   this.timeLeft = setInterval(() =>{
-    if( this.startTimer > 0){
-      this.startTimer -= 1;
+    if( this.startTimer > 0) {
+        this.startTimer -= 1;
     } else {
       clearInterval(this.timeLeft);
-      this.resetTimer();
-      // this.timeLeft = null;
-      return;
+      this.cancelTimer();
+      this.timeLeft = null;
+      return
     }
     this.showTime(this.startTime);
     this.animatedLine();
   },1000)
-
 }
+
+//shows Time
+showTime(second) {
+  const minute = Math.floor(second / 60);
+  const repeatSecond = second % 60;
+  this.blockTimer.innerText = `${minute}:${remaindSecond < 10 ? '0' : ''}${remaindSecond}`;
+
+// reset timer
+  cancelTimer() {
+    this.timerLine.style.width = 100%;
+    this.startTime = this.second;
+    this.button.textContent = ("Start");
+    this.showTime(this.second);
+  }
+
+  finishTimer() {
+    clearInterval(this.timeLeft);
+  }
 
 //animation of line
 animatedLine() {
@@ -32,11 +48,21 @@ animatedLine() {
   this.timeline.style.width = (lineWidth - path) >= 0 ? `${lineWidth - step}px` : `${0}px`
 }
 
-//shows Time
-showTime(second) {
-  const minute = Math.floor(second / 60);
-  const repeatSecond = second % 60;
-  this.blockTimer.innerText = `${minute}:${remaindSecond < 10 ? '0' : ''}${remaindSecond}`;
+//creaction of timer line
+createTimerLine() {
+  this.thimerLine = document.createElement("div");
+  this.timerLine.classList += "timerline"
+  return this.timerLine;
+}
+
+begin() {
+  if(this.start) {
+    this.button.textContent = "Start";
+    this.pressedButton()
+  } else {
+    this.button.textContent = "Stop";
+    this.pressedButton();
+  }
 }
 
 // executive function
@@ -53,34 +79,6 @@ render(){
   this.blockTimer = document.createElement("div");
   this.blockTimer.classList.add("time-block");
 
-
-}
-//creaction of timer line
-createTimerLine() {
-  this.thimerLine = document.createElement("div");
-  this.timerLine.classList += "timerline"
-  return this.timerLine;
-}
-// reset timer
-cancelTimer() {
-  this.timerLine.style.width = 100%;
-  this.startTime = this.second;
-  this.button.textContent = ("Start");
-  this.showTime(this.second);
-}
-
-finishTimer() {
-  clearInterval(this.timeLeft);
-}
-
-activeButton() {
-  if(this.button.textContent == "Start") {
-     this.button.textContent = "Stop";
-     this.countDown();
-  }else {
-    this.button.textContent = "Start";
-    this.finishTimer();
-  }
 }
 
 const timerOne = new mainTimer(3);
@@ -93,12 +91,14 @@ class timerTwo extends mainTimer {
   }
 }
 
-begin() {
-  if(this.start) {
+activeButton() {
+  if(this.button.textContent == "Start") {
+     this.button.textContent = "Stop";
+     this.countDown();
+  }else {
     this.button.textContent = "Start";
-    this.pressedButton()
-  } else {
-    this.button.textContent = "Stop";
-    this.pressedButton();
+    this.finishTimer();
   }
 }
+
+const timerTwo = new timerTwo(1000, true);
