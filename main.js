@@ -78,7 +78,7 @@ render() {
   this.button.classList.add("button");
   this.button.textContent = "Start";
   timer.append(this.button);
-  this.button.addEventListener("click", this.pressedButton.bind(this));
+  this.button.addEventListener("click", this.begin.bind(this));
   this.showTime(this.second);
   timer.append(this.createTimerLine());
   this.width = this.timeLine.offsetWidth;
