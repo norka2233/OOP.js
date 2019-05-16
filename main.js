@@ -106,4 +106,4 @@ beginWork() {
  }
 }
 
-const timerNuberTwo = new timerTwo(1000, true);
+const timerNumberTwo = new timerTwo(1000, true);
