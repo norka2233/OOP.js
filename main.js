@@ -27,12 +27,12 @@ counter(){
 showTime(second) {
   const minute = Math.floor(second / 60);
   const repeatSecond = second % 60;
-  this.blockTimer.innerText = `${minute}:${remaindSecond < 10 ? '0' : ''}${remaindSecond}`;
+  this.blockTimer.innerText = `${minute}:${repeatSecond < 10 ? '0' : ''}${repeatSecond}`;
 }
 
 // reset timer
   cancelTimer() {
-    // this.timerLine.style.width = {$100%};
+    this.timerLine.style.width = `${100}%`;
     this.startTime = this.second;
     this.button.textContent = ("Start");
     this.showTime(this.second);
@@ -46,19 +46,18 @@ showTime(second) {
 animatedLine() {
   const lineWidth = this.timerLine.offsetWidth;
   const path = Math.round((this.width)/(this.second));
-  this.timerline.style.width = (lineWidth - path) >= 0 ? `${lineWidth - step}%` : `${0}%`
+  this.timerLine.style.width = (lineWidth - path) >= 0 ? `${lineWidth - path}%` : `${0}%`
 }
-
 //creation of timer line
 createTimerLine() {
-  const TimerLine = document.createElement("div");
-  TimerLine.classList += "timerline"
-  return TimerLine;
+  this.timerLine = document.createElement("div");
+  this.timerLine.classList += "timerLine"
+  return this.timerLine;
 }
 
 begin() {
-  if(this.button.textContent = "Start") {
-    this.button.textContent = "Stop";
+  if(this.button.textContent == "Start") {
+    this.button.textContent == "Stop";
     this.counter();
   }
   else {
@@ -70,25 +69,28 @@ begin() {
 
 // executive function
 render() {
-  timer.classList += "wrapper";
+  timer.classList += "cover";
+
   this.blockTimer = document.createElement("div");
   this.blockTimer.classList.add("time-block");
   timer.append(this.blockTimer)
+
   this.button = document.createElement("button");
   this.button.classList.add("button");
   this.button.textContent = "Start";
   timer.append(this.button);
   this.button.addEventListener("click", this.begin.bind(this));
+
   this.showTime(this.second);
   timer.append(this.createTimerLine());
-  this.width = this.timeLine.offsetWidth;
+  this.width = this.timerLine.offsetWidth;
 }
 }
 
 const timerOne = new MainTimer(3);
 
 class timerTwo extends MainTimer {
-  constructor(second, defaulBegin = false) {
+  constructor(second, defaultBegin = false) {
     super(second);
     this.defaultBegin = defaultBegin;
     this.beginWork();
@@ -96,7 +98,7 @@ class timerTwo extends MainTimer {
 
 
 beginWork() {
-  if(this.defaulBegin) {
+  if(this.defaultBegin) {
      this.button.textContent = "Start";
      this.begin();
   }else {
