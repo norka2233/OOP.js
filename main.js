@@ -34,8 +34,9 @@ showTime(second) {
   cancelTimer() {
     this.timerLine.style.width = `${100}%`;
     this.startTime = this.second;
-    this.button.textContent = ("Start");
     this.showTime(this.second);
+    this.button.textContent = "Start";
+
   }
 
   finishTimer() {
@@ -46,7 +47,7 @@ showTime(second) {
 animatedLine() {
   const lineWidth = this.timerLine.offsetWidth;
   const path = Math.round((this.width)/(this.second));
-  this.timerLine.style.width = (lineWidth - path) >= 0 ? `${lineWidth - path}%` : `${0}%`
+  this.timerLine.style.width = (lineWidth - path) >= 0 ? `${lineWidth - path}px` : `${0}%`
 }
 //creation of timer line
 createTimerLine() {
